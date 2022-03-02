@@ -1,0 +1,52 @@
+#Write a Query that Shows top 100 customer countries 
+#top ten result was the following 
+Country count
+#India (44) 60, China (23) 53, United States (103) 36, Japan (50) 31, Mexico (60) 30, Brazil (15) 28, RussianFederation (80) 28, Philippines (75) 20, Turkey 15
+
+#The Code for the Results Above was the following
+CODE: 
+SELECT D.country,
+C.city,
+COUNT(customer_id)
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER JOIN city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_id = D.country_id
+WHERE D.country IN ('United States',
+				   'India',
+				   'China',
+				   'Japan',
+				   'Mexico',
+				   'Brazil',
+				   'Russian Federation',
+				   'Philippines',
+				   'Turkey')
+GROUP BY D.country, C.city
+ORDER BY count DESC
+LIMIT 100;
+
+#Write a Query showing the top 5 customers from our data set 
+
+SELECT E.country,
+D.city,
+B.Last_Name,
+B.First_Name,
+C.Address,
+SUM(Amount)
+FROM payment A
+INNER JOIN customer B ON A.customer_id = B.customer_id
+INNER JOIN address C ON B.address_id = C.address_id
+INNER JOIN city D ON C.city_id = D.city_id
+INNER JOIN country E ON D.country_id = E.country_id
+WHERE E.country IN ('United States',
+				   'India',
+				   'China',
+				   'Japan',
+				   'Mexico',
+				   'Brazil',
+				   'Russian Federation',
+				   'Philippines',
+				   'Turkey')
+GROUP BY E.country, D.city, B.Last_Name, B.First_Name, C.Address
+ORDER BY sum DESC
+LIMIT 5;
