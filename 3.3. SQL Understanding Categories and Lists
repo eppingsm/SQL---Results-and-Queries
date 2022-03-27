@@ -1,0 +1,30 @@
+#Create a count of the appearance of different categories in the dataset
+#The following code is a set of basic commands in SQL necessary for changing category names, deleting irrelevant information from data 
+#frames or renaming poorly named sections
+
+SELECT name, category_id
+FROM category 
+
+#Insert a category into the list 
+INSERT INTO category(name, category_id)
+VALUES('War',21)
+
+#Create a category Table
+(category_id integer NOT NULL DEFAULT nextval('category_category_id_seq'::regclass),
+#NOT NULL does not allow for a 0 value, integer – the value must be an integer
+  name text COLLATE pg_catalog."default" NOT NULL,
+#COLLATE: sorts the order of the data, text – it is character based not integer based, NOT NULL does not allow for a simple 0
+  last_update timestamp with time zone NOT NULL DEFAULT now(),
+timestamp: provides a stamp with the time of recording, NOT NULL – no zeros
+  CONSTRAINT category_pkey PRIMARY KEY (category_id)
+);
+PRIMARY KEY – makes category_id our main identifier in this table
+
+#Update Names of a Category 
+UPDATE film_category
+SET category_id = 14
+WHERE film_id = 5
+
+#Delete a section of the dataset 
+DELETE from category
+WHERE name = 'Mystery'
