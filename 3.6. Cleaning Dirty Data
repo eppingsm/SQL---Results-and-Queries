@@ -1,0 +1,77 @@
+#Running a Duplicate Check on Data 
+#Data Duplicate Check: (film table) 
+
+SELECT title,
+       release_year,
+       language_id,
+       rental_duration,
+       COUNT(*)
+FROM film
+GROUP BY title,
+         release_year,
+         language_id,
+         rental_duration
+HAVING COUNT(*) >1;
+
+#From A Second Table 
+SELECT Customer_id, 
+	   Store_id, 
+	   First_name, 
+	   Last_name, 
+	   Email, 
+	   Address_id, 
+	   Activebool, 
+	   Create_date, 
+	   Last_update, 
+	   Active, 
+       COUNT(*)
+FROM customer
+GROUP BY Customer_id, 
+	   Store_id, 
+	   First_name, 
+	   Last_name, 
+	   Email, 
+	   Address_id, 
+	   Activebool, 
+	   Create_date, 
+	   Last_update, 
+	   Active 
+HAVING COUNT(*) >1;
+
+#Remove the Duplicate ID's from the table 
+DELETE
+FROM tablename
+WHERE unique_id NOT IN
+    (SELECT MIN(unique_id)
+     FROM tablename
+     GROUP BY col1,
+              col2,
+              col3, ...)
+
+#Group Distinct Data 
+SELECT DISTINCT title,
+                release_year,
+                language_id,
+                rental_duration
+FROM film;
+
+#Rename Similar values in the table 
+UPDATE film //table name//
+SET rating //column name// = 'G'
+WHERE rating //column name// IN ('gen',
+                 'g',
+                 'General')
+                 
+#use AVG, MIN, MAX, and COUNT all in a single table 
+SELECT MIN(release_year) AS min_release,
+       MAX(release_year) AS max_release,
+       AVG(release_year) AS avg_release,
+       COUNT(release_year) AS count_release,
+       COUNT(*) AS count_rows
+FROM film;
+
+#RESULT 
+#Min	Max	   Avg	 Count_values	Count_rows
+#2006	2006	2006	1000	        1000
+
+
