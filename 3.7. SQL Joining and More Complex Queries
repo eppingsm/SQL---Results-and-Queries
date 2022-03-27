@@ -1,0 +1,59 @@
+#In order to get the top ten countries, 3 tables needed to be joined using left or inner join
+#Customer count, group by country, and order by DESC with a limit of 10 is what we need
+
+SELECT D.country,
+COUNT(customer_id)
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER JOIN city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_id = D.country_id
+GROUP BY D.country
+ORDER BY count DESC
+LIMIT 10;
+
+#Query two is that we need the top 100 customers in the top 10 countries, order by country_id, city_id, customer_id COUNT
+SELECT D.country,
+C.city,
+COUNT(customer_id)
+FROM customer A
+INNER JOIN address B ON A.address_id = B.address_id
+INNER JOIN city C ON B.city_id = C.city_id
+INNER JOIN country D ON C.country_id = D.country_id
+WHERE D.country IN ('United States',
+				   'India',
+				   'China',
+				   'Japan',
+				   'Mexico',
+				   'Brazil',
+				   'Russian Federation',
+				   'Philippines',
+				   'Turkey')
+GROUP BY D.country, C.city
+ORDER BY count DESC
+LIMIT 100;
+
+#Query 3 was to find the top 5 customers 
+SELECT E.country,
+D.city,
+B.Last_Name,
+B.First_Name,
+C.Address,
+SUM(Amount)
+FROM payment A
+INNER JOIN customer B ON A.customer_id = B.customer_id
+INNER JOIN address C ON B.address_id = C.address_id
+INNER JOIN city D ON C.city_id = D.city_id
+INNER JOIN country E ON D.country_id = E.country_id
+WHERE E.country IN ('United States',
+				   'India',
+				   'China',
+				   'Japan',
+				   'Mexico',
+				   'Brazil',
+				   'Russian Federation',
+				   'Philippines',
+				   'Turkey')
+GROUP BY E.country, D.city, B.Last_Name, B.First_Name, C.Address
+ORDER BY sum DESC
+LIMIT 5;
+
