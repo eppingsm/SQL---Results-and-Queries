@@ -1,4 +1,7 @@
-# SQL---Results-and-Queries
+3 Project Overview
+Sarah Epping
+
+# SQL---The Purpose of the Project Overview
 SQL - Results and Queries from the Rockbuster data set
 Working with the Rockbuster datasets the code focused on using keys and different types of joins to create a report in Tableau for Rockbuster stakeholders. 
 The link to the report can be found here. https://public.tableau.com/app/profile/sarah4642/viz/RockbusterFilmIndustryFinal/Story1
