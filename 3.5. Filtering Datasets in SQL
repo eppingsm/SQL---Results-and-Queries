@@ -1,0 +1,56 @@
+#How to filter out information from a column where a word is contained 
+SELECT title
+FROM film 
+	WHERE title LIKE '%Uptown%'
+#any results will contain the word Uptown
+
+#filtering data based on other factors 
+SELECT title, length, rental_rate
+FROM film 
+	WHERE Length > 120 and
+		rental_rate > 2.99
+#any results will be based on length of film and rental duration code returned 157 documents 
+
+#filtering only based on rental duration 
+SELECT title, rental_duration
+FROM film 
+	WHERE rental_duration > 3 and
+	rental_duration < 7
+#code returned 606 documents 
+
+#focus on title and replacement cost 
+SELECT title, replacement_cost
+FROM film 
+	WHERE replacement_cost < 14.99
+#code returns 249 documents 
+
+#ratings and or statements 
+SELECT title, rating
+FROM film 
+	WHERE rating = 'PG' or
+	rating = 'G'
+#code returns 372 documents 
+
+#Using AVG, MAX, and MIN
+SELECT AVG(rental_rate)
+FROM film 
+	WHERE rating = 'PG' or
+	rating = 'G'
+#Average rental rate – 2.97 USD
+
+SELECT MAX(rental_duration)
+FROM film 
+	WHERE rating = 'PG' or
+	rating = 'G'
+	#Max rental duration – 7 
+
+SELECT MIN(rental_duration)
+FROM film 
+	WHERE rating = 'PG' or
+	rating = 'G'
+#Min rental duration – 3 
+
+
+
+
+
