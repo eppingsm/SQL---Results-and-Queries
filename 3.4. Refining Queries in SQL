@@ -1,0 +1,16 @@
+#How to Select Specific Columns and Understanding Query Costs
+SELECT DISTINCT film_id,
+                title
+FROM film
+#cost is 69.00 as opposed to 113.83 if we were to select the whole set
+
+#Query for Sorting the Output
+SELECT film,
+       release_year,
+	   rental_rate
+FROM film
+ORDER BY film ASC, 
+         release_year DESC, 
+         rental_rate DESC
+
+#A note should also be made that MIN, MAX, and AVERAGE functions work the same as in excel for all integer based columns
